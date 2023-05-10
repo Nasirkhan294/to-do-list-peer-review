@@ -1,10 +1,10 @@
 export const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-function saveTasks() {
+export function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-function addTask(description) {
+export function addTask(description) {
   const task = {
     description,
     completed: false,
@@ -14,7 +14,7 @@ function addTask(description) {
   saveTasks();
 }
 
-function deleteTask(index) {
+export function deleteTask(index) {
   tasks.splice(index, 1);
   for (let i = index; i < tasks.length; i += 1) {
     tasks[i].index = i;
@@ -28,5 +28,3 @@ export function editTask(index, newDescription) {
     saveTasks();
   }
 }
-
-module.exports = {saveTasks, addTask, deleteTask};
