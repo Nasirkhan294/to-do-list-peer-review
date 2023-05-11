@@ -11,5 +11,35 @@ const deleteTask = (item) => {
   return newTodos;
 };
 
-exports.addTask = addTask;
-exports.deleteTask = deleteTask;
+function editTask(taskId, updatedTask) {
+  // find the task with the specified ID in the tasks array
+  const taskIndex = todos.findIndex((todo) => todo.id === taskId);
+
+  // if the task is found, update its properties with the new values
+  if (taskIndex !== -1) {
+    todos[taskIndex] = {
+      ...todos[taskIndex],
+      ...updatedTask,
+    };
+
+    return todos[taskIndex];
+  }
+
+  // if the task is not found, return null
+  return null;
+}
+
+const updateCompletedStatus = (itemId, status) => {
+  const taskIndex = todos.findIndex((todo) => todo.id === itemId);
+
+  if (taskIndex !== -1) {
+    todos[taskIndex].completed = status;
+    return todos[taskIndex];
+  }
+
+  return null;
+};
+
+module.exports = {
+  addTask, deleteTask, editTask, updateCompletedStatus,
+};
