@@ -1,4 +1,4 @@
-const todos = [];
+let todos = [];
 
 const addTask = (item) => {
   todos.push(item);
@@ -40,6 +40,13 @@ const updateCompletedStatus = (itemId, status) => {
   return null;
 };
 
+const clearCompleted = () => {
+  const newTodos = todos.filter((todo) => !todo.completed);
+  newTodos.forEach((todo, id) => { todo.id = id + 1; });
+  todos = newTodos;
+  return todos;
+};
+
 module.exports = {
-  addTask, deleteTask, editTask, updateCompletedStatus,
+  addTask, deleteTask, editTask, updateCompletedStatus, clearCompleted,
 };

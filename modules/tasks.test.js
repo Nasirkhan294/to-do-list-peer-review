@@ -1,5 +1,5 @@
 import {
-  addTask, deleteTask, editTask, updateCompletedStatus,
+  addTask, deleteTask, editTask, updateCompletedStatus, clearCompleted,
 } from '../_mocks_/tasks.js';
 
 describe('addtask function', () => {
@@ -63,5 +63,20 @@ describe('updateCompletedStatus function', () => {
     const updatedStatus = true;
     const updatedItem = updateCompletedStatus(taskId, updatedStatus);
     expect(updatedItem.status).toEqual(updatedStatus);
+  });
+});
+
+describe('clearCompleted function', () => {
+  test('when the user clears completed tasks, it should return a list of uncompleted tasks', () => {
+    const taskList = [
+      { task: 'Task 1', id: 1, status: false },
+      { task: 'Task 2', id: 2, status: true },
+      { task: 'Task 3', id: 3, status: false },
+      { task: 'Task 4', id: 4, status: true },
+      { task: 'Task 5', id: 5, status: false },
+    ];
+    const uncompletedTasks = clearCompleted(taskList);
+    const completedTasks = uncompletedTasks.filter((task) => task.status === true);
+    expect(completedTasks.length).toEqual(0);
   });
 });
